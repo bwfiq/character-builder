@@ -12,5 +12,8 @@ FROM debian:bookworm
 WORKDIR /app
 # Copy the built app from the builder stage
 COPY --from=builder /app/target/release/backend .
+COPY *.html .
+# Expose the web server port
+EXPOSE 7878
 # Command to run the executable
 CMD ["./backend"]

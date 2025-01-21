@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  rust-backend:
+    build:
+      context: ./src/backend
+    ports:
+      - "8080:8080"

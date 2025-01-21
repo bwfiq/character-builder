@@ -1,16 +1,16 @@
 # Use the latest Rust image
-FROM rust:latest as builder
+FROM rust:bookworm AS builder
 # Set the working directory
-WORKDIR /usr/src/backend
+WORKDIR /app
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 # Build the Rust app
 RUN cargo build --release
 
 # Start a new stage from scratch
-FROM debian:buster
-WORKDIR /usr/src/app
+FROM debian:bookworm
+WORKDIR /app
 # Copy the built app from the builder stage
-COPY --from=builder /usr/src/backend/target/release/backend .
+COPY --from=builder /app/target/release/backend .
 # Command to run the executable
 CMD ["./backend"]
